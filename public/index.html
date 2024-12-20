@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>MQTT Motor Control</title>
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  <style>
+    body {font-family: Arial, sans-serif; text-align: center;}
+    .slider {width: 300px; margin: 20px;}
+  </style>
+</head>
+<body>
+  <h2>DC Motor Speed Control</h2>
+  <p>Speed: <span id="speedValue">0</span></p>
+  <input type="range" min="0" max="255" value="0" class="slider" id="speedSlider" onchange="updateSpeed(this.value)">
+
+  <script>
+    const client = mqtt.connect('wss://mqtt.eclipseprojects.io:443'); // Public MQTT broker
+
+    client.on('connect', () => {
+      console.log("Connected to MQTT broker!");
+    });
+
+    function updateSpeed(value) {
+      document.getElementById('speedValue').innerText = value;
+      client.publish("motor/speed", value); // Publish slider value
+    }
+  </script>
+</body>
+</html>

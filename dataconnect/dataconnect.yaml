@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "firebasee"
+location: "us-central1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "firebasee-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
